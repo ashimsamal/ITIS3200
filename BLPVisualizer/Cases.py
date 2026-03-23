@@ -58,14 +58,14 @@ TEST_CASES = {
         ("write", "alice", "emails.txt"),
     ],
 
-    # Case 9: Alice reads username.txt, writes to emails.txt, reads password.txt, writes to password.txt
-    # Alice reads username.txt (allow, level raised to S). Write to emails.txt is deny (S > C, no write down).
-    # Read password.txt is deny (TS > Alice's max S). Write to password.txt is allow (S <= TS).
+    # Case 9: Alice reads emails.txt, writes to username.txt, reads password.txt, writes to emails.txt
+    # Alice reads emails.txt (allow, level raised to C). Write to username.txt is allow (C <= S, writing up).
+    # Read password.txt is deny (TS > Alice's max S, level stays C). Write to emails.txt is allow (C <= C).
     9: [
-        ("read",  "alice", "username.txt"),
-        ("write", "alice", "emails.txt"),
+        ("read",  "alice", "emails.txt"),
+        ("write", "alice", "username.txt"),
         ("read",  "alice", "password.txt"),
-        ("write", "alice", "password.txt"),
+        ("write", "alice", "emails.txt"),
     ],
 
     # Case 10: Alice reads pub.txt, writes to emails.txt, Bob reads emails.txt
